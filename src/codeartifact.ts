@@ -19,13 +19,15 @@ export class CodeArtifact extends Construct {
 
     if (props.repositories) {
       for (const repoProps of props.repositories) {
-        this.repositories.push(new CfnRepository(scope, repoProps.repositoryName, {
+        const repo = new CfnRepository(scope, repoProps.repositoryName, {
           domainName: this.props.domainName,
           ...repoProps,
-        }));
+        });
+
+        repo.node.addDependency(this.domain);
+        this.repositories.push(repo);
       }
     }
-
   }
 
 }

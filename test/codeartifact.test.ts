@@ -4,8 +4,8 @@ import { CodeArtifact } from '../src/codeartifact';
 import { CodeArtifactProps } from '../src/types';
 
 test('construct tests', () => {
-  const testDomainName = 'testDomainName';
-  const testRepoName = 'testRepoName';
+  const testDomainName = 'test-domain-name';
+  const testRepoName = 'test-repo-name';
 
   const stack : Stack = new Stack();
 
@@ -16,7 +16,7 @@ test('construct tests', () => {
     }],
   };
 
-  const codeartifact = new CodeArtifact(stack, 'testArtifact', stackProps);
+  const codeartifact = new CodeArtifact(stack, 'test-artifact', stackProps);
 
   expect(codeartifact.props).toBe(stackProps);
   expect(codeartifact.repositories.length).toBe(1);
@@ -33,9 +33,9 @@ test('construct tests', () => {
 });
 
 test('test multiple repos', () => {
-  const testDomainName = 'testDomainName';
-  const testRepoName1 = 'testRepoName1';
-  const testRepoName2 = 'testRepoName2';
+  const testDomainName = 'test-domain-name';
+  const testRepoName1 = 'test-repo-name1';
+  const testRepoName2 = 'test-repo-name2';
 
   const stack : Stack = new Stack();
 
