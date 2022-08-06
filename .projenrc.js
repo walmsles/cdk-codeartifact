@@ -1,15 +1,14 @@
-const { AwsCdkConstructLibrary } = require('projen');
-const project = new AwsCdkConstructLibrary({
+const { awscdk } = require('projen');
+const project = new awscdk.AwsCdkConstructLibrary({
   author: 'walmsles',
   authorAddress: '2704782+walmsles@users.noreply.github.com',
-  cdkVersion: '1.129.0',
+  cdkVersion: '2.35.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-codeartifact',
   repositoryUrl: 'https://github.com/2704782+walmsles/cdk-codeartifact.git',
-
-  // cdkDependencies: undefined,      /* Which AWS CDK modules (those that start with "@aws-cdk/") does this library require when consumed? */
-  // cdkTestDependencies: undefined,  /* AWS CDK modules required for testing. */
-  // deps: [],                        /* Runtime dependencies of this module. */
+  devDeps: [
+    'aws-cdk-lib',
+  ],
   // description: undefined,          /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],                     /* Build dependencies for this module. */
   // packageName: undefined,          /* The "name" in package.json. */
