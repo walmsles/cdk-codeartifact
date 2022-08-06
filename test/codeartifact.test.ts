@@ -50,7 +50,5 @@ test('test multiple repos', () => {
   };
 
   const codeartifact = new CodeArtifact(stack, 'testArtifact', stackProps);
-
   expect(codeartifact.repositories.length).toBe(2);
-
 });
