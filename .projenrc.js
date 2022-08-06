@@ -6,9 +6,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   defaultReleaseBranch: 'main',
   name: 'cdk-codeartifact',
   repositoryUrl: 'https://github.com/walmsles/cdk-codeartifact',
-  // description: undefined,          /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],                     /* Build dependencies for this module. */
-  // packageName: undefined,          /* The "name" in package.json. */
-  // release: undefined,              /* Add release management to this project. */
+  description: 'This is an AWS CDK Construct to create a new AWS Codeartifact Domain and one or more Repositories',
 });
 project.synth();
