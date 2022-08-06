@@ -6,9 +6,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   defaultReleaseBranch: 'main',
   name: 'cdk-codeartifact',
   repositoryUrl: 'https://github.com/2704782+walmsles/cdk-codeartifact.git',
-  devDeps: [
-    'aws-cdk-lib',
-  ],
   // description: undefined,          /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],                     /* Build dependencies for this module. */
   // packageName: undefined,          /* The "name" in package.json. */
