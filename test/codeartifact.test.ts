@@ -1,7 +1,7 @@
 import { Stack } from 'aws-cdk-lib/';
 import { Match, Template } from 'aws-cdk-lib/assertions';
-import { CodeArtifact } from './codeartifact';
-import { CodeArtifactProps } from './types';
+import { CodeArtifact } from '../src/codeartifact';
+import { CodeArtifactProps } from '../src/types';
 
 test('construct tests', () => {
   const testDomainName = 'testDomainName';
