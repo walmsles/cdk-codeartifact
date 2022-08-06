@@ -2,13 +2,13 @@ import { CfnDomainProps } from 'aws-cdk-lib/aws-codeartifact';
 import * as cdk from 'aws-cdk-lib/core';
 
 export enum ExternalRepository {
-  Npm = 'public:npmjs',
-  PyPi = 'public:pypi',
-  MavenCentral = 'public:msven-central',
-  MavenGoogleAndroid = 'public:maven-googleandroid',
-  MavenGradlePlugins = 'public:maven-gradleplugins',
-  MavenCOmmonsWare = 'public:maven-commonsware',
-  NuGet = 'public:nuget-org'
+  NPM = 'public:npmjs',
+  PYPI = 'public:pypi',
+  MAVEN_CENTRAL = 'public:msven-central',
+  MAVEN_GOOGLE_ANDROID = 'public:maven-googleandroid',
+  MAVEN_GRADLE_PLUGINS = 'public:maven-gradleplugins',
+  MAVEN_COMMONSWARE = 'public:maven-commonsware',
+  NUGET = 'public:nuget-org'
 }
 
 export interface RepositoryProps {
