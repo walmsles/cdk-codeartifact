@@ -2,6 +2,8 @@ const { awscdk } = require('projen');
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Michael Walmsley (@walmsles)',
   authorAddress: '2704782+walmsles@users.noreply.github.com',
+  version: '0.0.3',
+  jsiiReleaseVersion: '0.0.3',
   cdkVersion: '2.35.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-codeartifact',
