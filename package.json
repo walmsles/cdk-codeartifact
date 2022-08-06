@@ -2,7 +2,7 @@
   "name": "cdk-codeartifact",
   "repository": {
     "type": "git",
-    "url": "https://github.com/2704782+walmsles/cdk-codeartifact.git"
+    "url": "https://github.com/walmsles/cdk-codeartifact"
   },
   "scripts": {
     "build": "npx projen build",
@@ -30,7 +30,7 @@
     "projen": "npx projen"
   },
   "author": {
-    "name": "walmsles",
+    "name": "Michael Walmsley (@walmsles)",
     "email": "2704782+walmsles@users.noreply.github.com",
     "organization": false
   },
@@ -67,7 +67,7 @@
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "jest": {
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.ts?(x)",

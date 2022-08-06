@@ -1,11 +1,11 @@
 const { awscdk } = require('projen');
 const project = new awscdk.AwsCdkConstructLibrary({
-  author: 'walmsles',
+  author: 'Michael Walmsley (@walmsles)',
   authorAddress: '2704782+walmsles@users.noreply.github.com',
   cdkVersion: '2.35.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-codeartifact',
-  repositoryUrl: 'https://github.com/2704782+walmsles/cdk-codeartifact.git',
+  repositoryUrl: 'https://github.com/walmsles/cdk-codeartifact',
   // description: undefined,          /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],                     /* Build dependencies for this module. */
   // packageName: undefined,          /* The "name" in package.json. */
