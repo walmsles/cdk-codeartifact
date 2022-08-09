@@ -1,8 +1,14 @@
 # cdk-codeartifact
 
-CDK Construct to create an AWS Codeartifact repository.  Construct combines creating both Domain and one or more Repositories into the one simple construct and also provides an enumerated type for public external connections.
+CDK Construct to create an AWS Codeartifact repository.  Construct combines creating both Domain and one or more Repositories into one construct and also provides an enumerated type for public external connections.
 
-There are some additional validations built-in to ensure the construct will deploy correctly.
+There are some additional validations built-in to ensure the construct will deploy correctly:
+
+- Naming convention checks for Codeartifact Domain Name.
+- Naming convention checks for Codeartifact Repository Name.
+- Passing in more than 1 external repository will throw an error - only 1 external repository is supported by Codeartifact.
+
+
 
 ## External Connection Type
 
