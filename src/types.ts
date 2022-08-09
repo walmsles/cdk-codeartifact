@@ -4,7 +4,7 @@ import * as cdk from 'aws-cdk-lib/core';
 export enum ExternalRepository {
   NPM = 'public:npmjs',
   PYPI = 'public:pypi',
-  MAVEN_CENTRAL = 'public:msven-central',
+  MAVEN_CENTRAL = 'public:maven-central',
   MAVEN_GOOGLE_ANDROID = 'public:maven-googleandroid',
   MAVEN_GRADLE_PLUGINS = 'public:maven-gradleplugins',
   MAVEN_COMMONSWARE = 'public:maven-commonsware',
