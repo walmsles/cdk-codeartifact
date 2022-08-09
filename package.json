@@ -62,7 +62,9 @@
     "constructs": "^10.0.5"
   },
   "keywords": [
-    "cdk"
+    "aws-cdk",
+    "cdk",
+    "codeartifact"
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
@@ -113,6 +115,7 @@
     "outdir": "dist",
     "targets": {
       "python": {
+        "distName": "cdk-codeartifact",
         "module": "cdk_artifact"
       }
     },
