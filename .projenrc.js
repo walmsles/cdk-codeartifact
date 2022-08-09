@@ -7,5 +7,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
   name: 'cdk-codeartifact',
   repositoryUrl: 'https://github.com/walmsles/cdk-codeartifact',
   description: 'This is an AWS CDK Construct to create a new AWS Codeartifact Domain and one or more Repositories',
+  docgen: true,
+  dependabot: true,
+  publishToPypi: {
+    distname: 'cdk-codeartifact',
+    module: 'cdk_artifact',
+  },
 });
 project.synth();
