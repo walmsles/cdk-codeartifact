@@ -42,14 +42,14 @@ $ npm install --save cdk-codeartifact
 
 ```typescript
 import { App, Stack, StackProps } from 'aws-cdk-lib';
-import { CodeArtifact, ExternalRepository } from 'cdk-codeartifact';
+import { Domain, ExternalRepository } from 'cdk-codeartifact';
 import { Construct } from 'constructs';
 
 export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
     super(scope, id, props);
 
-    new CodeArtifact(this, id, {
+    new Domain(this, id, {
       domainName: 'test-domain',
       repositories: [{
         repositoryName: 'test-repo',

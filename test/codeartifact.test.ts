@@ -1,7 +1,6 @@
 import { Stack } from 'aws-cdk-lib/';
 import { Match, Template } from 'aws-cdk-lib/assertions';
-import { CodeArtifact } from '../src/codeartifact';
-import { CodeArtifactProps } from '../src/types';
+import { CodeArtifact, CodeArtifactProps } from '../src/codeartifact';
 
 test('construct tests', () => {
   const testDomainName = 'test-domain-name';
@@ -20,7 +19,8 @@ test('construct tests', () => {
 
   expect(codeartifact.props).toBe(stackProps);
   expect(codeartifact.repositories.length).toBe(1);
-  expect(codeartifact.domain.domainName).toBe(testDomainName);
+
+  expect(codeartifact.domainInstance.domainName).toBe(testDomainName);
 
   const template = Template.fromStack(stack);
 
