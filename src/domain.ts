@@ -111,12 +111,13 @@ export class Domain extends Construct {
     this.domainInstance = new CfnDomain(this, props.domainName, props);
 
     if (props.repositories) {
+      let idx = 1;
       for (const repoProps of props.repositories) {
         validations.validateRepoNameLength(repoProps.repositoryName);
         validations.validateRepoName(repoProps.repositoryName);
         validations.validateExternalConnections(repoProps.externalConnections);
 
-        const repoName = `${repoProps.repositoryName}`;
+        const repoName = `${repoProps.repositoryName}${idx}`;
         const repo = new Repository(this, repoName, {
           domainName: this.props.domainName,
           ...repoProps,
@@ -124,6 +125,8 @@ export class Domain extends Construct {
 
         repo.node.addDependency(this.domainInstance);
         this.repositories.push(repo);
+
+        idx = idx + 1;
       }
     }
   }
