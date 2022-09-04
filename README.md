@@ -8,6 +8,18 @@ There are some additional validations built-in to ensure the construct will depl
 - Naming convention checks for Codeartifact Repository Name.
 - Passing in more than 1 external repository will throw an error - only 1 external repository is supported by Codeartifact.
 
+## Breaking Changes - Migrating to V1.0.0
+
+**Release 1.0.0 introduces breaking changes** so any project you have created using pre-1.0.0 of cdk-codeartifact should not be upgraded to this version.
+
+Migrating to Version 1.0.0 will require any existing stacks to be removed before upgrading. The Cloudformation composition synthesized in V1.0.0 has a different composition, which means that Cloudformation will detect a change in how the stack is constructed and will try to delete the existing CodeArtifact domain and/or repositories.  This will not be possible if any artifacts have been pushed into the repositories.
+
+The original **CodeArtifact** construct class has been deprecated and is replaced by the **Domain** class which better reflects what this code construct is doing.  For convenience, a **Repository** class has been added so that a stand-alone repository can also be created using this library.  The Repository class is a simple extension of the **CfnRepository** class at this stage without any additional functionality.
+
+All Interface Property structures have been renamed to start with a capital "I" to conform to the usual dotnet convention for interface naming, this will assist when cross-compilation is enabled for this construct.
+
+
+
 
 
 ## External Connection Type
