@@ -1,8 +1,8 @@
-const { awscdk } = require('projen');
+const { awscdk, DependencyType } = require('projen');
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Michael Walmsley (@walmsles)',
   authorAddress: '2704782+walmsles@users.noreply.github.com',
-  cdkVersion: '2.35.0',
+  cdkVersion: '2.39.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-codeartifact',
   repositoryUrl: 'https://github.com/walmsles/cdk-codeartifact',
@@ -14,4 +14,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
     module: 'cdk_artifact',
   },
 });
+
+project.addPeerDeps('constructs@^10.1.89');
+project.addDevDeps('constructs@^10.1.89');
+project.addDevDeps('aws-cdk-lib@^2');
+
 project.synth();

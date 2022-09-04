@@ -1,6 +1,6 @@
 import { Stack } from 'aws-cdk-lib/';
 import { Match, Template } from 'aws-cdk-lib/assertions';
-import { CodeArtifact, CodeArtifactProps } from '../src/codeartifact';
+import { Domain, DomainProps } from '../src/domain';
 
 test('construct tests', () => {
   const testDomainName = 'test-domain-name';
@@ -8,18 +8,17 @@ test('construct tests', () => {
 
   const stack : Stack = new Stack();
 
-  const stackProps : CodeArtifactProps = {
+  const stackProps : DomainProps = {
     domainName: testDomainName,
     repositories: [{
       repositoryName: testRepoName,
     }],
   };
 
-  const codeartifact = new CodeArtifact(stack, 'test-artifact', stackProps);
+  const codeartifact = new Domain(stack, 'test-artifact', stackProps);
 
   expect(codeartifact.props).toBe(stackProps);
   expect(codeartifact.repositories.length).toBe(1);
-
   expect(codeartifact.domainInstance.domainName).toBe(testDomainName);
 
   const template = Template.fromStack(stack);
@@ -39,7 +38,7 @@ test('test multiple repos', () => {
 
   const stack : Stack = new Stack();
 
-  const stackProps : CodeArtifactProps = {
+  const stackProps : DomainProps = {
     domainName: testDomainName,
     repositories: [{
       repositoryName: testRepoName1,
@@ -49,6 +48,6 @@ test('test multiple repos', () => {
     }],
   };
 
-  const codeartifact = new CodeArtifact(stack, 'testArtifact', stackProps);
+  const codeartifact = new Domain(stack, 'testArtifact', stackProps);
   expect(codeartifact.repositories.length).toBe(2);
 });
