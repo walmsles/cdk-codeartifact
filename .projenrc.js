@@ -17,9 +17,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   projenVersion: '0.95.6',
 });
 
-// Update jsii-pacmak to latest version for Python 3.12 support
-project.addDevDeps('jsii-pacmak@^1.114.1');
-
 project.addPeerDeps('constructs@^10.1.89');
 project.addDevDeps('constructs@^10.1.89');
 project.addDevDeps('aws-cdk-lib@^2');
