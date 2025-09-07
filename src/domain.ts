@@ -105,9 +105,9 @@ export interface IDomainProps {
  * });
  */
 export class Domain extends Construct {
-  readonly props : IDomainProps;
+  readonly props: IDomainProps;
   readonly repositories: Repository[] = [];
-  readonly domainInstance : CfnDomain;
+  readonly domainInstance: CfnDomain;
 
   constructor(scope: Construct, id: string, props: IDomainProps) {
     super(scope, id);

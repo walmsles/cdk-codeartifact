@@ -8,5 +8,5 @@ export enum ExternalRepository {
   MAVEN_GOOGLE_ANDROID = 'public:maven-googleandroid',
   MAVEN_GRADLE_PLUGINS = 'public:maven-gradleplugins',
   MAVEN_COMMONSWARE = 'public:maven-commonsware',
-  NUGET = 'public:nuget-org'
+  NUGET = 'public:nuget-org',
 }

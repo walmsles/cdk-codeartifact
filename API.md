@@ -761,7 +761,7 @@ tree inspector to collect and process attributes.
 | --- | --- |
 | <code><a href="#cdk-codeartifact.Repository.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
 | <code><a href="#cdk-codeartifact.Repository.isCfnElement">isCfnElement</a></code> | Returns `true` if a construct is a stack element (i.e. part of the synthesized cloudformation template). |
-| <code><a href="#cdk-codeartifact.Repository.isCfnResource">isCfnResource</a></code> | Check whether the given construct is a CfnResource. |
+| <code><a href="#cdk-codeartifact.Repository.isCfnResource">isCfnResource</a></code> | Check whether the given object is a CfnResource. |
 
 ---
 
@@ -821,14 +821,14 @@ versions of this library to be included in the same stack.
 ```typescript
 import { Repository } from 'cdk-codeartifact'
 
-Repository.isCfnResource(construct: IConstruct)
+Repository.isCfnResource(x: any)
 ```
 
-Check whether the given construct is a CfnResource.
+Check whether the given object is a CfnResource.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="cdk-codeartifact.Repository.isCfnResource.parameter.construct"></a>
+###### `x`<sup>Required</sup> <a name="x" id="cdk-codeartifact.Repository.isCfnResource.parameter.x"></a>
 
-- *Type:* constructs.IConstruct
+- *Type:* any
 
 ---
 
