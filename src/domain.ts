@@ -96,7 +96,6 @@ export interface IDomainProps {
  * Can be used to create just a domain by passing in no IDomainRepositoryProps elements
  *
  * @example
- * ```typescript
  * new Domain(this, 'MyDomain', {
  *   domainName: 'my-domain',
  *   repositories: [{
@@ -104,7 +103,6 @@ export interface IDomainProps {
  *     externalConnections: [ExternalRepository.NPM]
  *   }]
  * });
- * ```
  */
 export class Domain extends Construct {
   readonly props : IDomainProps;
