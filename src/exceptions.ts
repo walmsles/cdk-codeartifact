@@ -1,5 +1,5 @@
 /**
- * Excpetion thrown when Domain Name is too long
+ * Exception thrown when Domain Name is too long
  */
 export class DomainNameTooLong extends Error {
   constructor(msg:string = 'Domain name too long.  Must be no more than 50 characters in length.') {
@@ -19,10 +19,10 @@ export class DomainNameInvalid extends Error {
 }
 
 /**
- * Excpetion thrown when Repository Name is not valid
+ * Exception thrown when Repository Name is not valid
  */
 export class RepositoryNameInvalid extends Error {
-  constructor(msg:string = 'Repository name is not valid.  Name must contain alphabetic letters of any case, numbers, "-", "." and "_" characters only.') {
+  constructor(msg:string = 'Repository name is not valid. Name must start with lowercase letter and contain only lowercase letters, numbers and "-" characters.') {
     super(msg);
     Object.setPrototypeOf(this, RepositoryNameInvalid.prototype);
   }

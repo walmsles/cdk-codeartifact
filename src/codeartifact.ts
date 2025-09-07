@@ -24,9 +24,9 @@ export type CodeArtifactProps = IDomainProps;
  * @deprecated CodeArtifact class is replaced by Domain and will be removed in future major release 1.1.0
  */
 export class CodeArtifact extends Construct {
-  readonly props : CodeArtifactProps;
+  readonly props: CodeArtifactProps;
   readonly repositories: CfnRepository[] = [];
-  readonly domainInstance : CfnDomain;
+  readonly domainInstance: CfnDomain;
 
   constructor(scope: Construct, id: string, props: CodeArtifactProps) {
     super(scope, id);

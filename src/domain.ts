@@ -37,7 +37,7 @@ export interface IDomainRepositoryProps {
    *
    * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-permissionspolicydocument
    */
-  readonly permissionsPolicyDocument?: any | cdk.IResolvable;
+  readonly permissionsPolicyDocument?: object | cdk.IResolvable;
   /**
    * A list of tags to be applied to the repository.
    *
@@ -53,7 +53,7 @@ export interface IDomainRepositoryProps {
 }
 
 /**
- * Properties for creating CodeArtifact Domain using the Domain contrstruct
+ * Properties for creating CodeArtifact Domain using the Domain construct
  *
  * DomainProps extends the L1 CfnDomainProps interface to ensure all CloudFormation capabilities are retained
  *
@@ -76,7 +76,7 @@ export interface IDomainProps {
    *
    * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-domain.html#cfn-codeartifact-domain-permissionspolicydocument
    */
-  readonly permissionsPolicyDocument?: any | cdk.IResolvable;
+  readonly permissionsPolicyDocument?: object | cdk.IResolvable;
   /**
    * A list of tags to be applied to the domain.
    *
@@ -91,15 +91,23 @@ export interface IDomainProps {
 
 
 /**
- * CodeArtifact Domain Construct - enables creation of a domain along with zero or more Repositories.
+ * CodeArtifact Domain Construct - enables creation of a domain along with zero or more repositories.
  *
- * Can be used to create just a domain by passing in no IDomainRepositoryProp elements
+ * Can be used to create just a domain by passing in no IDomainRepositoryProps elements
  *
+ * @example
+ * new Domain(this, 'MyDomain', {
+ *   domainName: 'my-domain',
+ *   repositories: [{
+ *     repositoryName: 'my-repo',
+ *     externalConnections: [ExternalRepository.NPM]
+ *   }]
+ * });
  */
 export class Domain extends Construct {
-  readonly props : IDomainProps;
+  readonly props: IDomainProps;
   readonly repositories: Repository[] = [];
-  readonly domainInstance : CfnDomain;
+  readonly domainInstance: CfnDomain;
 
   constructor(scope: Construct, id: string, props: IDomainProps) {
     super(scope, id);

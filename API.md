@@ -74,20 +74,6 @@ CodeArtifact.isConstruct(x: any)
 
 Checks if `x` is a construct.
 
-Use this method instead of `instanceof` to properly detect `Construct`
-instances, even when the construct library is symlinked.
-
-Explanation: in JavaScript, multiple copies of the `constructs` library on
-disk are seen as independent, completely different libraries. As a
-consequence, the class `Construct` in each copy of the `constructs` library
-is seen as a different class, and an instance of one class will not test as
-`instanceof` the other class. `npm install` will not create installations
-like this, but users may manually symlink construct libraries together or
-use a monorepo tool: in those cases, multiple copies of the `constructs`
-library can be accidentally installed, and `instanceof` will behave
-unpredictably. It is safest to avoid using `instanceof`, and using
-this type-testing method instead.
-
 ###### `x`<sup>Required</sup> <a name="x" id="cdk-codeartifact.CodeArtifact.isConstruct.parameter.x"></a>
 
 - *Type:* any
@@ -160,9 +146,22 @@ public readonly repositories: CfnRepository[];
 
 ### Domain <a name="Domain" id="cdk-codeartifact.Domain"></a>
 
-CodeArtifact Domain Construct - enables creation of a domain along with zero or more Repositories.
+CodeArtifact Domain Construct - enables creation of a domain along with zero or more repositories.
 
-Can be used to create just a domain by passing in no IDomainRepositoryProp elements
+Can be used to create just a domain by passing in no IDomainRepositoryProps elements
+
+*Example*
+
+```typescript
+new Domain(this, 'MyDomain', {
+  domainName: 'my-domain',
+  repositories: [{
+    repositoryName: 'my-repo',
+    externalConnections: [ExternalRepository.NPM]
+  }]
+});
+```
+
 
 #### Initializers <a name="Initializers" id="cdk-codeartifact.Domain.Initializer"></a>
 
@@ -222,7 +221,7 @@ Returns a string representation of this construct.
 
 ---
 
-##### `isConstruct` <a name="isConstruct" id="cdk-codeartifact.Domain.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="cdk-codeartifact.Domain.isConstruct"></a>
 
 ```typescript
 import { Domain } from 'cdk-codeartifact'
@@ -231,20 +230,6 @@ Domain.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
-
-Use this method instead of `instanceof` to properly detect `Construct`
-instances, even when the construct library is symlinked.
-
-Explanation: in JavaScript, multiple copies of the `constructs` library on
-disk are seen as independent, completely different libraries. As a
-consequence, the class `Construct` in each copy of the `constructs` library
-is seen as a different class, and an instance of one class will not test as
-`instanceof` the other class. `npm install` will not create installations
-like this, but users may manually symlink construct libraries together or
-use a monorepo tool: in those cases, multiple copies of the `constructs`
-library can be accidentally installed, and `instanceof` will behave
-unpredictably. It is safest to avoid using `instanceof`, and using
-this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="cdk-codeartifact.Domain.isConstruct.parameter.x"></a>
 
@@ -353,6 +338,7 @@ new Repository(scope: Construct, id: string, props: CfnRepositoryProps)
 | <code><a href="#cdk-codeartifact.Repository.toString">toString</a></code> | Returns a string representation of this construct. |
 | <code><a href="#cdk-codeartifact.Repository.overrideLogicalId">overrideLogicalId</a></code> | Overrides the auto-generated logical ID with a specific ID. |
 | <code><a href="#cdk-codeartifact.Repository.addDeletionOverride">addDeletionOverride</a></code> | Syntactic sugar for `addOverride(path, undefined)`. |
+| <code><a href="#cdk-codeartifact.Repository.addDependency">addDependency</a></code> | Indicates that this resource depends on another resource and cannot be provisioned unless the other resource has been successfully provisioned. |
 | <code><a href="#cdk-codeartifact.Repository.addDependsOn">addDependsOn</a></code> | Indicates that this resource depends on another resource and cannot be provisioned unless the other resource has been successfully provisioned. |
 | <code><a href="#cdk-codeartifact.Repository.addMetadata">addMetadata</a></code> | Add a value to the CloudFormation Resource Metadata. |
 | <code><a href="#cdk-codeartifact.Repository.addOverride">addOverride</a></code> | Adds an override to the synthesized CloudFormation resource. |
@@ -361,6 +347,10 @@ new Repository(scope: Construct, id: string, props: CfnRepositoryProps)
 | <code><a href="#cdk-codeartifact.Repository.applyRemovalPolicy">applyRemovalPolicy</a></code> | Sets the deletion policy of the resource based on the removal policy specified. |
 | <code><a href="#cdk-codeartifact.Repository.getAtt">getAtt</a></code> | Returns a token for an runtime attribute of this resource. |
 | <code><a href="#cdk-codeartifact.Repository.getMetadata">getMetadata</a></code> | Retrieve a value value from the CloudFormation Resource Metadata. |
+| <code><a href="#cdk-codeartifact.Repository.obtainDependencies">obtainDependencies</a></code> | Retrieves an array of resources this resource depends on. |
+| <code><a href="#cdk-codeartifact.Repository.obtainResourceDependencies">obtainResourceDependencies</a></code> | Get a shallow copy of dependencies between this resource and other resources in the same stack. |
+| <code><a href="#cdk-codeartifact.Repository.removeDependency">removeDependency</a></code> | Indicates that this resource no longer depends on another resource. |
+| <code><a href="#cdk-codeartifact.Repository.replaceDependency">replaceDependency</a></code> | Replaces one dependency with another. |
 | <code><a href="#cdk-codeartifact.Repository.inspect">inspect</a></code> | Examines the CloudFormation resource and discloses attributes. |
 
 ---
@@ -405,16 +395,30 @@ The path of the value to delete.
 
 ---
 
-##### `addDependsOn` <a name="addDependsOn" id="cdk-codeartifact.Repository.addDependsOn"></a>
+##### `addDependency` <a name="addDependency" id="cdk-codeartifact.Repository.addDependency"></a>
 
 ```typescript
-public addDependsOn(target: CfnResource): void
+public addDependency(target: CfnResource): void
 ```
 
 Indicates that this resource depends on another resource and cannot be provisioned unless the other resource has been successfully provisioned.
 
 This can be used for resources across stacks (or nested stack) boundaries
 and the dependency will automatically be transferred to the relevant scope.
+
+###### `target`<sup>Required</sup> <a name="target" id="cdk-codeartifact.Repository.addDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.CfnResource
+
+---
+
+##### ~~`addDependsOn`~~ <a name="addDependsOn" id="cdk-codeartifact.Repository.addDependsOn"></a>
+
+```typescript
+public addDependsOn(target: CfnResource): void
+```
+
+Indicates that this resource depends on another resource and cannot be provisioned unless the other resource has been successfully provisioned.
 
 ###### `target`<sup>Required</sup> <a name="target" id="cdk-codeartifact.Repository.addDependsOn.parameter.target"></a>
 
@@ -479,20 +483,20 @@ cfnResource.addOverride('Properties.GlobalSecondaryIndexes.1.ProjectionType', 'I
 would add the overrides
 ```json
 "Properties": {
-   "GlobalSecondaryIndexes": [
-     {
-       "Projection": {
-         "NonKeyAttributes": [ "myattribute" ]
-         ...
-       }
-       ...
-     },
-     {
-       "ProjectionType": "INCLUDE"
-       ...
-     },
-   ]
-   ...
+  "GlobalSecondaryIndexes": [
+    {
+      "Projection": {
+        "NonKeyAttributes": [ "myattribute" ]
+        ...
+      }
+      ...
+    },
+    {
+      "ProjectionType": "INCLUDE"
+      ...
+    },
+  ]
+  ...
 }
 ```
 
@@ -508,7 +512,7 @@ template.
 
 The path of the property, you can use dot notation to override values in complex types.
 
-Any intermdediate keys
+Any intermediate keys
 will be created as needed.
 
 ---
@@ -601,7 +605,7 @@ can be found in the following link:
 ##### `getAtt` <a name="getAtt" id="cdk-codeartifact.Repository.getAtt"></a>
 
 ```typescript
-public getAtt(attributeName: string): Reference
+public getAtt(attributeName: string, typeHint?: ResolutionTypeHint): Reference
 ```
 
 Returns a token for an runtime attribute of this resource.
@@ -614,6 +618,12 @@ in case there is no generated attribute.
 - *Type:* string
 
 The name of the attribute.
+
+---
+
+###### `typeHint`<sup>Optional</sup> <a name="typeHint" id="cdk-codeartifact.Repository.getAtt.parameter.typeHint"></a>
+
+- *Type:* aws-cdk-lib.ResolutionTypeHint
 
 ---
 
@@ -641,6 +651,66 @@ node metadata ends up in the Cloud Assembly.)
 
 ---
 
+##### `obtainDependencies` <a name="obtainDependencies" id="cdk-codeartifact.Repository.obtainDependencies"></a>
+
+```typescript
+public obtainDependencies(): Stack | CfnResource[]
+```
+
+Retrieves an array of resources this resource depends on.
+
+This assembles dependencies on resources across stacks (including nested stacks)
+automatically.
+
+##### `obtainResourceDependencies` <a name="obtainResourceDependencies" id="cdk-codeartifact.Repository.obtainResourceDependencies"></a>
+
+```typescript
+public obtainResourceDependencies(): CfnResource[]
+```
+
+Get a shallow copy of dependencies between this resource and other resources in the same stack.
+
+##### `removeDependency` <a name="removeDependency" id="cdk-codeartifact.Repository.removeDependency"></a>
+
+```typescript
+public removeDependency(target: CfnResource): void
+```
+
+Indicates that this resource no longer depends on another resource.
+
+This can be used for resources across stacks (including nested stacks)
+and the dependency will automatically be removed from the relevant scope.
+
+###### `target`<sup>Required</sup> <a name="target" id="cdk-codeartifact.Repository.removeDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.CfnResource
+
+---
+
+##### `replaceDependency` <a name="replaceDependency" id="cdk-codeartifact.Repository.replaceDependency"></a>
+
+```typescript
+public replaceDependency(target: CfnResource, newTarget: CfnResource): void
+```
+
+Replaces one dependency with another.
+
+###### `target`<sup>Required</sup> <a name="target" id="cdk-codeartifact.Repository.replaceDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.CfnResource
+
+The dependency to replace.
+
+---
+
+###### `newTarget`<sup>Required</sup> <a name="newTarget" id="cdk-codeartifact.Repository.replaceDependency.parameter.newTarget"></a>
+
+- *Type:* aws-cdk-lib.CfnResource
+
+The new dependency to add.
+
+---
+
 ##### `inspect` <a name="inspect" id="cdk-codeartifact.Repository.inspect"></a>
 
 ```typescript
@@ -663,11 +733,11 @@ tree inspector to collect and process attributes.
 | --- | --- |
 | <code><a href="#cdk-codeartifact.Repository.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
 | <code><a href="#cdk-codeartifact.Repository.isCfnElement">isCfnElement</a></code> | Returns `true` if a construct is a stack element (i.e. part of the synthesized cloudformation template). |
-| <code><a href="#cdk-codeartifact.Repository.isCfnResource">isCfnResource</a></code> | Check whether the given construct is a CfnResource. |
+| <code><a href="#cdk-codeartifact.Repository.isCfnResource">isCfnResource</a></code> | Check whether the given object is a CfnResource. |
 
 ---
 
-##### `isConstruct` <a name="isConstruct" id="cdk-codeartifact.Repository.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="cdk-codeartifact.Repository.isConstruct"></a>
 
 ```typescript
 import { Repository } from 'cdk-codeartifact'
@@ -676,20 +746,6 @@ Repository.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
-
-Use this method instead of `instanceof` to properly detect `Construct`
-instances, even when the construct library is symlinked.
-
-Explanation: in JavaScript, multiple copies of the `constructs` library on
-disk are seen as independent, completely different libraries. As a
-consequence, the class `Construct` in each copy of the `constructs` library
-is seen as a different class, and an instance of one class will not test as
-`instanceof` the other class. `npm install` will not create installations
-like this, but users may manually symlink construct libraries together or
-use a monorepo tool: in those cases, multiple copies of the `constructs`
-library can be accidentally installed, and `instanceof` will behave
-unpredictably. It is safest to avoid using `instanceof`, and using
-this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="cdk-codeartifact.Repository.isConstruct.parameter.x"></a>
 
@@ -723,14 +779,14 @@ versions of this library to be included in the same stack.
 ```typescript
 import { Repository } from 'cdk-codeartifact'
 
-Repository.isCfnResource(construct: IConstruct)
+Repository.isCfnResource(x: any)
 ```
 
-Check whether the given construct is a CfnResource.
+Check whether the given object is a CfnResource.
 
-###### `construct`<sup>Required</sup> <a name="construct" id="cdk-codeartifact.Repository.isCfnResource.parameter.construct"></a>
+###### `x`<sup>Required</sup> <a name="x" id="cdk-codeartifact.Repository.isCfnResource.parameter.x"></a>
 
-- *Type:* constructs.IConstruct
+- *Type:* any
 
 ---
 
@@ -749,13 +805,14 @@ Check whether the given construct is a CfnResource.
 | <code><a href="#cdk-codeartifact.Repository.property.attrDomainName">attrDomainName</a></code> | <code>string</code> | When you pass the logical ID of this resource, the function returns the domain name that contains the repository. |
 | <code><a href="#cdk-codeartifact.Repository.property.attrDomainOwner">attrDomainOwner</a></code> | <code>string</code> | When you pass the logical ID of this resource, the function returns the 12-digit account number of the AWS account that owns the domain that contains the repository. |
 | <code><a href="#cdk-codeartifact.Repository.property.attrName">attrName</a></code> | <code>string</code> | When you pass the logical ID of this resource, the function returns the name of the repository. |
-| <code><a href="#cdk-codeartifact.Repository.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | A list of tags to be applied to the repository. |
+| <code><a href="#cdk-codeartifact.Repository.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | Tag Manager which manages the tags for this resource. |
 | <code><a href="#cdk-codeartifact.Repository.property.domainName">domainName</a></code> | <code>string</code> | The name of the domain that contains the repository. |
-| <code><a href="#cdk-codeartifact.Repository.property.permissionsPolicyDocument">permissionsPolicyDocument</a></code> | <code>any</code> | The document that defines the resource policy that is set on a repository. |
 | <code><a href="#cdk-codeartifact.Repository.property.repositoryName">repositoryName</a></code> | <code>string</code> | The name of an upstream repository. |
 | <code><a href="#cdk-codeartifact.Repository.property.description">description</a></code> | <code>string</code> | A text description of the repository. |
 | <code><a href="#cdk-codeartifact.Repository.property.domainOwner">domainOwner</a></code> | <code>string</code> | The 12-digit account number of the AWS account that owns the domain that contains the repository. |
 | <code><a href="#cdk-codeartifact.Repository.property.externalConnections">externalConnections</a></code> | <code>string[]</code> | An array of external connections associated with the repository. |
+| <code><a href="#cdk-codeartifact.Repository.property.permissionsPolicyDocument">permissionsPolicyDocument</a></code> | <code>any</code> | The document that defines the resource policy that is set on a repository. |
+| <code><a href="#cdk-codeartifact.Repository.property.tagsRaw">tagsRaw</a></code> | <code>aws-cdk-lib.CfnTag[]</code> | A list of tags to be applied to the repository. |
 | <code><a href="#cdk-codeartifact.Repository.property.upstreams">upstreams</a></code> | <code>string[]</code> | A list of upstream repositories to associate with the repository. |
 
 ---
@@ -908,9 +965,7 @@ public readonly tags: TagManager;
 
 - *Type:* aws-cdk-lib.TagManager
 
-A list of tags to be applied to the repository.
-
-> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-tags](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-tags)
+Tag Manager which manages the tags for this resource.
 
 ---
 
@@ -924,22 +979,6 @@ public readonly domainName: string;
 
 The name of the domain that contains the repository.
 
-> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-domainname](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-domainname)
-
----
-
-##### `permissionsPolicyDocument`<sup>Required</sup> <a name="permissionsPolicyDocument" id="cdk-codeartifact.Repository.property.permissionsPolicyDocument"></a>
-
-```typescript
-public readonly permissionsPolicyDocument: any;
-```
-
-- *Type:* any
-
-The document that defines the resource policy that is set on a repository.
-
-> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-permissionspolicydocument](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-permissionspolicydocument)
-
 ---
 
 ##### `repositoryName`<sup>Required</sup> <a name="repositoryName" id="cdk-codeartifact.Repository.property.repositoryName"></a>
@@ -951,8 +990,6 @@ public readonly repositoryName: string;
 - *Type:* string
 
 The name of an upstream repository.
-
-> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-repositoryname](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-repositoryname)
 
 ---
 
@@ -966,8 +1003,6 @@ public readonly description: string;
 
 A text description of the repository.
 
-> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-description](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-description)
-
 ---
 
 ##### `domainOwner`<sup>Optional</sup> <a name="domainOwner" id="cdk-codeartifact.Repository.property.domainOwner"></a>
@@ -979,10 +1014,6 @@ public readonly domainOwner: string;
 - *Type:* string
 
 The 12-digit account number of the AWS account that owns the domain that contains the repository.
-
-It does not include dashes or spaces.
-
-> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-domainowner](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-domainowner)
 
 ---
 
@@ -996,7 +1027,29 @@ public readonly externalConnections: string[];
 
 An array of external connections associated with the repository.
 
-> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-externalconnections](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-externalconnections)
+---
+
+##### `permissionsPolicyDocument`<sup>Optional</sup> <a name="permissionsPolicyDocument" id="cdk-codeartifact.Repository.property.permissionsPolicyDocument"></a>
+
+```typescript
+public readonly permissionsPolicyDocument: any;
+```
+
+- *Type:* any
+
+The document that defines the resource policy that is set on a repository.
+
+---
+
+##### `tagsRaw`<sup>Optional</sup> <a name="tagsRaw" id="cdk-codeartifact.Repository.property.tagsRaw"></a>
+
+```typescript
+public readonly tagsRaw: CfnTag[];
+```
+
+- *Type:* aws-cdk-lib.CfnTag[]
+
+A list of tags to be applied to the repository.
 
 ---
 
@@ -1009,10 +1062,6 @@ public readonly upstreams: string[];
 - *Type:* string[]
 
 A list of upstream repositories to associate with the repository.
-
-The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see [Working with upstream repositories](https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html) .
-
-> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-upstreams](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codeartifact-repository.html#cfn-codeartifact-repository-upstreams)
 
 ---
 
@@ -1044,7 +1093,7 @@ The CloudFormation resource type name for this resource class.
 
 - *Implemented By:* <a href="#cdk-codeartifact.IDomainProps">IDomainProps</a>
 
-Properties for creating CodeArtifact Domain using the Domain contrstruct.
+Properties for creating CodeArtifact Domain using the Domain construct.
 
 DomainProps extends the L1 CfnDomainProps interface to ensure all CloudFormation capabilities are retained
 
@@ -1055,7 +1104,7 @@ DomainProps extends the L1 CfnDomainProps interface to ensure all CloudFormation
 | --- | --- | --- |
 | <code><a href="#cdk-codeartifact.IDomainProps.property.domainName">domainName</a></code> | <code>string</code> | A string that specifies the name of the requested domain. |
 | <code><a href="#cdk-codeartifact.IDomainProps.property.encryptionKey">encryptionKey</a></code> | <code>string</code> | The key used to encrypt the domain. |
-| <code><a href="#cdk-codeartifact.IDomainProps.property.permissionsPolicyDocument">permissionsPolicyDocument</a></code> | <code>any</code> | The document that defines the resource policy that is set on a domain. |
+| <code><a href="#cdk-codeartifact.IDomainProps.property.permissionsPolicyDocument">permissionsPolicyDocument</a></code> | <code>object \| aws-cdk-lib.IResolvable</code> | The document that defines the resource policy that is set on a domain. |
 | <code><a href="#cdk-codeartifact.IDomainProps.property.repositories">repositories</a></code> | <code><a href="#cdk-codeartifact.IDomainRepositoryProps">IDomainRepositoryProps</a>[]</code> | a list of Repositories to create. |
 | <code><a href="#cdk-codeartifact.IDomainProps.property.tags">tags</a></code> | <code>aws-cdk-lib.CfnTag[]</code> | A list of tags to be applied to the domain. |
 
@@ -1092,10 +1141,10 @@ The key used to encrypt the domain.
 ##### `permissionsPolicyDocument`<sup>Optional</sup> <a name="permissionsPolicyDocument" id="cdk-codeartifact.IDomainProps.property.permissionsPolicyDocument"></a>
 
 ```typescript
-public readonly permissionsPolicyDocument: any;
+public readonly permissionsPolicyDocument: object | IResolvable;
 ```
 
-- *Type:* any
+- *Type:* object | aws-cdk-lib.IResolvable
 
 The document that defines the resource policy that is set on a domain.
 
@@ -1144,7 +1193,7 @@ Prop definition for DomainRepository - when creating Domain and Repository toget
 | <code><a href="#cdk-codeartifact.IDomainRepositoryProps.property.description">description</a></code> | <code>string</code> | A text description of the repository. |
 | <code><a href="#cdk-codeartifact.IDomainRepositoryProps.property.domainOwner">domainOwner</a></code> | <code>string</code> | The 12-digit account number of the AWS account that owns the domain that contains the repository. |
 | <code><a href="#cdk-codeartifact.IDomainRepositoryProps.property.externalConnections">externalConnections</a></code> | <code>string[]</code> | An array of external connections associated with the repository. |
-| <code><a href="#cdk-codeartifact.IDomainRepositoryProps.property.permissionsPolicyDocument">permissionsPolicyDocument</a></code> | <code>any</code> | The document that defines the resource policy that is set on a repository. |
+| <code><a href="#cdk-codeartifact.IDomainRepositoryProps.property.permissionsPolicyDocument">permissionsPolicyDocument</a></code> | <code>object \| aws-cdk-lib.IResolvable</code> | The document that defines the resource policy that is set on a repository. |
 | <code><a href="#cdk-codeartifact.IDomainRepositoryProps.property.tags">tags</a></code> | <code>aws-cdk-lib.CfnTag[]</code> | A list of tags to be applied to the repository. |
 | <code><a href="#cdk-codeartifact.IDomainRepositoryProps.property.upstreams">upstreams</a></code> | <code>string[]</code> | A list of upstream repositories to associate with the repository. |
 
@@ -1211,10 +1260,10 @@ An array of external connections associated with the repository.
 ##### `permissionsPolicyDocument`<sup>Optional</sup> <a name="permissionsPolicyDocument" id="cdk-codeartifact.IDomainRepositoryProps.property.permissionsPolicyDocument"></a>
 
 ```typescript
-public readonly permissionsPolicyDocument: any;
+public readonly permissionsPolicyDocument: object | IResolvable;
 ```
 
-- *Type:* any
+- *Type:* object | aws-cdk-lib.IResolvable
 
 The document that defines the resource policy that is set on a repository.
 
