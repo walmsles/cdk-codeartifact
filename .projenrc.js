@@ -16,6 +16,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
   projenVersion: '0.98.10',
   packageManager: javascript.NodePackageManager.NPM,
+  projenTokenSecret: 'GITHUB_TOKEN',
 });
 
 // Upgrade jsii dependencies to resolve compatibility issues
