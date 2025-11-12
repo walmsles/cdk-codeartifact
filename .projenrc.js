@@ -18,7 +18,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   packageManager: javascript.NodePackageManager.NPM,
 });
 
-// Upgrade jsii-rosetta to resolve peer dependency conflicts
+// Upgrade jsii dependencies to resolve compatibility issues
 project.addDevDeps('jsii-rosetta@~5.7.0');
+project.addDevDeps('jsii-docgen@^10.11.0');
 
 project.synth();
