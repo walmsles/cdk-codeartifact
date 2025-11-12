@@ -1,4 +1,4 @@
-const { awscdk, DependencyType } = require('projen');
+const { awscdk, javascript } = require('projen');
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Michael Walmsley (@walmsles)',
   authorAddress: '2704782+walmsles@users.noreply.github.com',
@@ -14,7 +14,13 @@ const project = new awscdk.AwsCdkConstructLibrary({
     distName: 'cdk-codeartifact',
     module: 'cdk_artifact',
   },
-  projenVersion: '0.95.6',
+  projenVersion: '0.98.10',
+  packageManager: javascript.NodePackageManager.NPM,
+  projenTokenSecret: 'GITHUB_TOKEN',
 });
+
+// Upgrade jsii dependencies to resolve compatibility issues
+project.addDevDeps('jsii-rosetta@~5.7.0');
+project.addDevDeps('jsii-docgen@^10.11.0');
 
 project.synth();

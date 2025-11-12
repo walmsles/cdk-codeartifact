@@ -654,7 +654,7 @@ node metadata ends up in the Cloud Assembly.)
 ##### `obtainDependencies` <a name="obtainDependencies" id="cdk-codeartifact.Repository.obtainDependencies"></a>
 
 ```typescript
-public obtainDependencies(): Stack | CfnResource[]
+public obtainDependencies(): (Stack | CfnResource)[]
 ```
 
 Retrieves an array of resources this resource depends on.
